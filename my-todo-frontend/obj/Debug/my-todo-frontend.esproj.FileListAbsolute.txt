@@ -1,0 +1,2 @@
+D:\Programming\GitHub\my-todo\my-todo-frontend\obj\Debug\my-todo-frontend.esproj.SuggestedBindingRedirects.cache
+D:\Programming\GitHub\my-todo\my-todo-frontend\obj\Debug\my-todo-frontend.esproj.CoreCompileInputs.cache
