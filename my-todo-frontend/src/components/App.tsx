@@ -1,12 +1,12 @@
 import React from 'react';
+import styles from '../styles/App.module.css';
+
 import Header from './Header';
 import Content from './Content';
 
-import './App.css';
-
 function App() {
     return (
-        <div id="App">
+        <div className={styles.App}>
             <Header />
             <br />
             <Content />

@@ -1,0 +1,10 @@
+.App {
+    display: flex;
+    flex-flow: column wrap;
+    height: 100vh;
+    background-color: #282c34;
+    color: white;
+    font-size: calc(10px + 2vmin);
+}
+
+
