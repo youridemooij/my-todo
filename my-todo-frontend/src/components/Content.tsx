@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '../styles/Content.module.css';
 
-import InputTextBox from './shared/InputTextBox';
+import TodoNameInputTextBox from './shared/TodoNameInputTextBox';
 
 function Content() {
+    const [todoItems, setTodoItemsArray] = useState<string[]>([]);
+
+    const addTodoItem = (todoName: string) => {
+        setTodoItemsArray(oldArray => [...oldArray, todoName]);
+    }
+
     return (
         <div className={styles.Content}>
-            <InputTextBox width={550} placeholder="Enter todo name..." id="newTodoItemNameInput" label="Todo name" />
+            <TodoNameInputTextBox addTodoItem={addTodoItem} />    
         </div>
     );
 }

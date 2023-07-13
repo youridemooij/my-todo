@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from '../../styles/InputTextBox.module.css';
 
 interface InputTextBoxProperties {
@@ -6,13 +6,35 @@ interface InputTextBoxProperties {
     placeholder: string
     id: string;
     label: string;
+    textEntered?: (newValue: string) => void;
 }
 
-function InputTextBox({ width, placeholder, id, label }: InputTextBoxProperties) {
+function InputTextBox({ width, placeholder, id, label, textEntered }: InputTextBoxProperties) {
+    const [currentValue, setCurrentvalue] = useState("");
+
+    const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setCurrentvalue(event.target.value);
+    }
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+        if (event.key === 'Enter') {
+            if (textEntered) {
+                textEntered(currentValue);
+                setCurrentvalue("");
+            }
+        }
+    }
+
     return (
         <div className={styles.InputTextBox} style={{ flexBasis: width }}>
             <label htmlFor={id} style={{ display: "none" }}>{label}</label>
-            <input type="text" placeholder={placeholder}></input>
+            <input
+                type="text"
+                placeholder={placeholder}
+                value={currentValue}
+                onChange={handleInputChange}
+                onKeyDown={handleKeyDown}></input>
+
         </div>
     );
 }
