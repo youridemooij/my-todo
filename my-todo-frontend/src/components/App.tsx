@@ -7,8 +7,7 @@ import Content from './Content';
 function App() {
     return (
         <div className={styles.App}>
-            <Header />
-            <br />
+            <Header />          
             <Content />
         </div>
     );

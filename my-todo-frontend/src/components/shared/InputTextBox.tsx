@@ -26,15 +26,14 @@ function InputTextBox({ width, placeholder, id, label, textEntered }: InputTextB
     }
 
     return (
-        <div className={styles.InputTextBox} style={{ flexBasis: width }}>
+        <div className={styles.InputTextBox} style={{ width: width }}>
             <label htmlFor={id} style={{ display: "none" }}>{label}</label>
             <input
                 type="text"
                 placeholder={placeholder}
                 value={currentValue}
                 onChange={handleInputChange}
-                onKeyDown={handleKeyDown}></input>
-
+                onKeyDown={handleKeyDown} />
         </div>
     );
 }
