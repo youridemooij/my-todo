@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from '../../styles/InputTextBox.module.css';
 
 interface InputTextBoxProperties {
@@ -10,7 +10,7 @@ interface InputTextBoxProperties {
 }
 
 function InputTextBox({ width, placeholder, id, label, textEntered }: InputTextBoxProperties) {
-    const [currentValue, setCurrentvalue] = useState("");
+    const [currentValue, setCurrentvalue] = React.useState("");
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentvalue(event.target.value);
