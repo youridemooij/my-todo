@@ -12,5 +12,7 @@ export interface TodoListItemModel {
     name: string,
     state?: number,
 
-    order: number
+    order: number,
+
+    editable?: boolean
 }

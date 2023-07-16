@@ -1,12 +1,8 @@
 .App {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    height: 100vh;
-    background-color: #282c34;
-    color: white;
-    font-size: calc(12px + 2vmin);
-    font-family: "Gotham SSm A", "Gotham SSm B", sans-serif;
-    line-height: normal;
+    gap: 50px;
+    flex-grow: 1;
 }

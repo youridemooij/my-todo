@@ -5,15 +5,16 @@ import { TodoListItemModel } from '../types';
 
 import BtnCompleteImage from '../../images/btn_todo_item_complete.png';
 import BtnDeleteImage from '../../images/btn_todo_item_delete.png';
+import BtnEditImage from '../../images/btn_todo_item_edit.png';
 
 interface TodoListItemProperties {
-    height: number,
     data: TodoListItemModel,
-
-    deleteItem?: (item: TodoListItemModel) => void
+    deleteItem?: (item: TodoListItemModel) => void,
+    toggleItemEditable?: (item: TodoListItemModel) => void,
+    updateItemName?: (newName: string, listId: number, itemId: number) => void
 }
 
-function TodoListItem({ height, data, deleteItem }: TodoListItemProperties) {
+function TodoListItem({ data, deleteItem, toggleItemEditable, updateItemName }: TodoListItemProperties) {
     const btnCompleteClick = () => {
 
 
@@ -26,17 +27,58 @@ function TodoListItem({ height, data, deleteItem }: TodoListItemProperties) {
         deleteItem(data);
     };
 
+    const btnEditClick = () => {
+        if (toggleItemEditable === undefined)
+            return;
+
+        toggleItemEditable(data);
+    };
+
+    const handleNameChange = (newValue: string, itemId: number) => {
+        if (updateItemName === undefined)
+            return;
+
+        updateItemName(newValue, data.listId, itemId);
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && data.editable) {
+            btnEditClick();
+        }
+    };
+
+    const inputRef = React.useRef<HTMLInputElement>(null);
+
+    React.useEffect(() => {
+        if (data.editable && inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, [data.editable]);
+
     return (
-        <div className={styles.TodoListItem} style={{ flexBasis: height }}>
-            <input type="text" value={data.name} />
+        <div className={styles.TodoListItem}>
+            <input
+                ref={inputRef}
+                type="text" value={data.name}
+                readOnly={!data.editable}
+                className={data.editable ? styles.Editable : ''}
+                onChange={e => handleNameChange(e.target.value, data.id)}
+                onBlur={data.editable ? btnEditClick : undefined}
+                onKeyDown={handleKeyDown}
+            />
 
             <div className={styles.Btns}>
+                <div className={`${styles.BtnEdit} ${data.editable ? styles.BtnEditActive : ''}`} onClick={btnEditClick}>
+                    <img src={BtnEditImage} alt="Edit todo item" />
+                </div>
+
                 <div className={styles.BtnComplete} onClick={btnCompleteClick}>
-                    <img src={BtnCompleteImage} height={32} width={32} alt="Mark todo item as completed" />
+                    <img src={BtnCompleteImage} alt="Mark todo item as completed" />
                 </div>
 
                 <div className={styles.BtnDelete} onClick={btnDeleteClick}>
-                    <img src={BtnDeleteImage} height={32} width={32} alt="Delete todo item" />
+                    <img src={BtnDeleteImage} alt="Delete todo item" />
                 </div>
             </div>
         </div>

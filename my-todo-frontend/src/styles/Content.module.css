@@ -1,3 +1,6 @@
 .Content {
-
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 50px;
 }

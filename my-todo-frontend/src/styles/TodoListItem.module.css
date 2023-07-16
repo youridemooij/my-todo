@@ -1,34 +1,47 @@
 .TodoListItem {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 7px;
-    margin-bottom: 7px;
+    margin-bottom: 30px;
+}
+
+.Editable {
+    border: solid 1px white !important;
 }
 
 .TodoListItem input[type=text] {
+    height: 56px;
     background-color: rgba(255, 255, 255, 0.3);
-    padding: 16px;
+    padding: 0px 16px;
     color: white;
-    font-size: calc(12px + 2vmin);
     border: none;
     border-radius: 4px;
     outline: none;
     box-shadow: 0px 4px 20px 0px transparent;
     transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out, 0.1s padding ease-in-out;
     -webkit-appearance: none;
-
     flex-grow: 1;
 }
 
+input[type=text][readonly] {
+    cursor: grab;
+}
+
 .Btns {
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+}
+
+.Btns img {
+    width: 20px;
+    height: 20px;
 }
 
 .BtnComplete {
 }
 
 .BtnDelete {
-    
 }
 
 img {
@@ -36,7 +49,7 @@ img {
     cursor: pointer;
 }
 
-img:hover {
+img:hover, .BtnEditActive {
     filter: invert();
     cursor: pointer;
 }

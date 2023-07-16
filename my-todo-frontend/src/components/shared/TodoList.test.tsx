@@ -7,5 +7,5 @@ it('renders without crashing', () => {
     const container = document.createElement('div');
     const root = createRoot(container!);
 
-    root.render(<TodoList width={0} data={{ id: 0, name: "Default" }} />);
+    root.render(<TodoList data={{ id: 0, name: "Default" }} />);
 });

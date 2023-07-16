@@ -2,14 +2,13 @@ import React from 'react';
 import styles from '../../styles/InputTextBox.module.css';
 
 interface InputTextBoxProperties {
-    width: number,
     placeholder: string
     id: string;
     label: string;
     textEntered?: (newValue: string) => void;
 }
 
-function InputTextBox({ width, placeholder, id, label, textEntered }: InputTextBoxProperties) {
+function InputTextBox({ placeholder, id, label, textEntered }: InputTextBoxProperties) {
     const [currentValue, setCurrentvalue] = React.useState("");
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,7 +25,7 @@ function InputTextBox({ width, placeholder, id, label, textEntered }: InputTextB
     }
 
     return (
-        <div className={styles.InputTextBox} style={{ width: width }}>
+        <div className={styles.InputTextBox}>
             <label htmlFor={id} style={{ display: "none" }}>{label}</label>
             <input
                 type="text"

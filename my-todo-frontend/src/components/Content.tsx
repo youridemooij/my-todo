@@ -68,26 +68,75 @@ function Content() {
         setTodoLists(updatedLists);
     };
 
+    const toggleTodoItemEditable = (listItem: TodoListItemModel) => {
+        const updatedLists = todoLists.map((list) => {
+            if (list.id !== listItem.listId) {
+                return list;
+            }
+
+            if (list.items === undefined)
+                return list;
+
+            const newItems = list.items.map((item) => {
+                if (item.id !== listItem.id) {
+                    return item;
+                }
+
+                return { ...item, editable: !item.editable };
+            });
+
+            return {
+                ...list,
+                items: newItems
+            };
+        });
+
+        setTodoLists(updatedLists);
+    };
+
+    const updateTodoItemName = (newName: string, listId: number, itemId: number) => {
+        const updatedLists = todoLists.map((list) => {
+            if (list.id !== listId) {
+                return list;
+            }
+
+            if (list.items === undefined)
+                return list;
+
+            const updatedItems = list.items.map((item) => {
+                if (item.id !== itemId) {
+                    return item;
+                }
+
+                return { ...item, name: newName };
+            });
+
+            return {
+                ...list,
+                items: updatedItems
+            };
+        });
+
+        setTodoLists(updatedLists);
+    };
+
     return (
         <div className={styles.Content}>
-            <br />
             <InputTextBox
-                width={500}
                 placeholder="Enter todo name..."
                 id="TodoItemNameInputTextBox"
                 label="Enter todo name..."
                 textEntered={text => addTodoItem(text, 0)}
                 />  
-            <br />
-            <br />
-            <br />
+
             {todoLists.map((todoList) => (
                 <TodoList
                     key={todoList.id}
-                    width={500}
                     data={todoList}
                     deleteItem={deleteTodoItem}
-                    updateItems={updateTodoItems} />
+                    updateItems={updateTodoItems}
+                    toggleItemEditable={toggleTodoItemEditable}
+                    updateItemName={updateTodoItemName} />
             ))}
         </div>
     );

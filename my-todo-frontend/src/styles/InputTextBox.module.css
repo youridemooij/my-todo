@@ -1,11 +1,10 @@
 .InputTextBox {
-    height: 56px;
     border-radius: 4px;
     background-color: rgba(255, 255, 255, 0.3);
     transition: 0.3s background-color ease-in-out, 0.3s box-shadow ease-in-out;
 }
 
-.InputTextBox input {    
+.InputTextBox input {      
     color: white;
     height: 56px;
     padding: 0px 16px;
